@@ -4,8 +4,6 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Reviews from './pages/Reviews';
-import Guides from './pages/Guides';
-import TopPicks from './pages/TopPicks';
 import About from './pages/About';
 import Contact from './pages/Contact';
 
@@ -18,8 +16,6 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/reviews" element={<Reviews />} />
-            <Route path="/guides" element={<Guides />} />
-            <Route path="/top-picks" element={<TopPicks />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
