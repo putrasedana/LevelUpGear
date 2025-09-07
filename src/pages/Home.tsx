@@ -8,6 +8,7 @@ import {
   Star,
   TrendingUp,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 import Newsletter from "../components/Newsletter";
 
@@ -16,24 +17,28 @@ const Home = () => {
     {
       icon: Headphones,
       name: "Gaming Headsets",
+      slug: "headsets",
       description: "Crystal clear audio for competitive gaming",
       count: "45+ Reviews",
     },
     {
       icon: Mic,
       name: "Streaming Microphones",
+      slug: "microphones",
       description: "Professional audio for content creators",
       count: "30+ Reviews",
     },
     {
       icon: Video,
       name: "Capture Cards",
+      slug: "capture-cards",
       description: "Stream and record in stunning quality",
       count: "20+ Reviews",
     },
     {
       icon: Settings,
       name: "Streaming Software",
+      slug: "software",
       description: "Tools to enhance your streaming workflow",
       count: "25+ Reviews",
     },
@@ -120,7 +125,8 @@ const Home = () => {
             {categories.map((category, index) => {
               const Icon = category.icon;
               return (
-                <div
+                <Link
+                  to={`/reviews?category=${category.slug}`}
                   key={index}
                   className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-xl p-6 group hover:border-purple-500/50 transition-all duration-300 hover:bg-gray-800/70 cursor-pointer"
                 >
@@ -138,7 +144,7 @@ const Home = () => {
                       {category.count}
                     </span>
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>

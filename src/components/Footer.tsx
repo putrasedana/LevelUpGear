@@ -1,8 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Gamepad2, Mail, Twitter, Youtube, Instagram } from "lucide-react";
 
 const Footer = () => {
+  const navigate = useNavigate();
+
+  const handleCategoryClick = (category: string) => {
+    navigate(`/reviews?category=${category}`);
+  };
+
   return (
     <footer className="bg-gray-950 border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -91,36 +97,36 @@ const Footer = () => {
             <h3 className="text-white font-semibold mb-4">Categories</h3>
             <ul className="space-y-2">
               <li>
-                <a
-                  href="#"
+                <button
+                  onClick={() => handleCategoryClick('headsets')}
                   className="text-gray-400 hover:text-purple-400 transition-colors"
                 >
                   Headsets
-                </a>
+                </button>
               </li>
               <li>
-                <a
-                  href="#"
+                <button
+                  onClick={() => handleCategoryClick('microphones')}
                   className="text-gray-400 hover:text-purple-400 transition-colors"
                 >
                   Microphones
-                </a>
+                </button>
               </li>
               <li>
-                <a
-                  href="#"
+                <button
+                  onClick={() => handleCategoryClick('capture-cards')}
                   className="text-gray-400 hover:text-purple-400 transition-colors"
                 >
                   Capture Cards
-                </a>
+                </button>
               </li>
               <li>
-                <a
-                  href="#"
+                <button
+                  onClick={() => handleCategoryClick('software')}
                   className="text-gray-400 hover:text-purple-400 transition-colors"
                 >
                   Streaming Software
-                </a>
+                </button>
               </li>
             </ul>
           </div>

@@ -1,10 +1,25 @@
 import React, { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Search, Filter, Star } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
 
 const Reviews = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedCategory, setSelectedCategory] = useState(
+    searchParams.get('category') || 'all'
+  );
+
+  // Update URL when category changes
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+    if (category === 'all') {
+      searchParams.delete('category');
+    } else {
+      searchParams.set('category', category);
+    }
+    setSearchParams(searchParams);
+  };
 
   const categories = [
     { value: 'all', label: 'All Categories' },
@@ -116,7 +131,7 @@ const Reviews = () => {
               <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
               <select
                 value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
+                onChange={(e) => handleCategoryChange(e.target.value)}
                 className="w-full pl-10 pr-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 appearance-none cursor-pointer"
               >
                 {categories.map((category) => (
@@ -155,7 +170,7 @@ const Reviews = () => {
             <button
               onClick={() => {
                 setSearchTerm('');
-                setSelectedCategory('all');
+                handleCategoryChange('all');
               }}
               className="text-purple-400 hover:text-purple-300 font-medium"
             >
