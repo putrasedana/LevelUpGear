@@ -139,7 +139,7 @@ const Footer = () => {
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a
-              href="#"
+              href="/privacy-policy"
               className="text-gray-400 hover:text-purple-400 text-sm transition-colors"
             >
               Privacy Policy
