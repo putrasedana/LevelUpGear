@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Search, Gamepad2 } from 'lucide-react';
+import { Menu, X, User, Gamepad2 } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -51,8 +51,9 @@ const Header = () => {
 
           {/* Search Button */}
           <div className="hidden md:flex items-center space-x-4">
-            <button className="p-2 text-gray-400 hover:text-purple-400 hover:bg-gray-800 rounded-lg transition-all">
-              <Search className="h-5 w-5" />
+            <button className="flex items-center space-x-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white px-4 py-2 rounded-lg font-medium transition-all transform hover:scale-105">
+              <User className="h-4 w-4" />
+              <span>Sign In</span>
             </button>
           </div>
 
@@ -84,9 +85,9 @@ const Header = () => {
                 </Link>
               ))}
               <div className="pt-2">
-                <button className="flex items-center space-x-2 px-3 py-2 text-gray-300 hover:text-purple-400">
-                  <Search className="h-5 w-5" />
-                  <span>Search</span>
+                <button className="flex items-center space-x-2 px-3 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white rounded-lg font-medium w-full justify-center">
+                  <User className="h-4 w-4" />
+                  <span>Sign In</span>
                 </button>
               </div>
             </div>
