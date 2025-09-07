@@ -1,66 +1,79 @@
-import React from 'react';
-import { ArrowRight, Headphones, Mic, Video, Settings, Star, TrendingUp } from 'lucide-react';
-import ProductCard from '../components/ProductCard';
-import Newsletter from '../components/Newsletter';
+import React from "react";
+import {
+  ArrowRight,
+  Headphones,
+  Mic,
+  Video,
+  Settings,
+  Star,
+  TrendingUp,
+} from "lucide-react";
+import ProductCard from "../components/ProductCard";
+import Newsletter from "../components/Newsletter";
 
 const Home = () => {
   const categories = [
     {
       icon: Headphones,
-      name: 'Gaming Headsets',
-      description: 'Crystal clear audio for competitive gaming',
-      count: '45+ Reviews'
+      name: "Gaming Headsets",
+      description: "Crystal clear audio for competitive gaming",
+      count: "45+ Reviews",
     },
     {
       icon: Mic,
-      name: 'Streaming Microphones',
-      description: 'Professional audio for content creators',
-      count: '30+ Reviews'
+      name: "Streaming Microphones",
+      description: "Professional audio for content creators",
+      count: "30+ Reviews",
     },
     {
       icon: Video,
-      name: 'Capture Cards',
-      description: 'Stream and record in stunning quality',
-      count: '20+ Reviews'
+      name: "Capture Cards",
+      description: "Stream and record in stunning quality",
+      count: "20+ Reviews",
     },
     {
       icon: Settings,
-      name: 'Streaming Software',
-      description: 'Tools to enhance your streaming workflow',
-      count: '25+ Reviews'
-    }
+      name: "Streaming Software",
+      description: "Tools to enhance your streaming workflow",
+      count: "25+ Reviews",
+    },
   ];
 
   const featuredProducts = [
     {
-      name: 'SteelSeries Arctis 7P Wireless Gaming Headset',
-      image: 'https://images.pexels.com/photos/3945667/pexels-photo-3945667.jpeg?auto=compress&cs=tinysrgb&w=400',
+      name: "SteelSeries Arctis 7P Wireless Gaming Headset",
+      image:
+        "https://images.pexels.com/photos/3945667/pexels-photo-3945667.jpeg?auto=compress&cs=tinysrgb&w=400",
       rating: 5,
-      price: '$149',
-      category: 'Gaming Headset',
-      features: ['Wireless 2.4GHz', '24-hour battery', 'DTS Headphone:X 2.0'],
-      affiliateLink: '#',
-      badge: 'Editor\'s Choice'
+      price: "$149",
+      category: "Gaming Headset",
+      features: ["Wireless 2.4GHz", "24-hour battery", "DTS Headphone:X 2.0"],
+      affiliateLink: "#",
     },
     {
-      name: 'Audio-Technica AT2020USB+ Cardioid Condenser',
-      image: 'https://images.pexels.com/photos/4348401/pexels-photo-4348401.jpeg?auto=compress&cs=tinysrgb&w=400',
+      name: "Audio-Technica AT2020USB+ Cardioid Condenser",
+      image:
+        "https://images.pexels.com/photos/4348401/pexels-photo-4348401.jpeg?auto=compress&cs=tinysrgb&w=400",
       rating: 5,
-      price: '$169',
-      category: 'USB Microphone',
-      features: ['Studio-grade sound', 'USB plug-and-play', 'Zero-latency monitoring'],
-      affiliateLink: '#',
-      badge: 'Best Value'
+      price: "$169",
+      category: "USB Microphone",
+      features: [
+        "Studio-grade sound",
+        "USB plug-and-play",
+        "Zero-latency monitoring",
+      ],
+      affiliateLink: "#",
     },
     {
-      name: 'Elgato HD60 S+ Capture Card',
-      image: 'https://images.pexels.com/photos/442150/pexels-photo-442150.jpeg?auto=compress&cs=tinysrgb&w=400',
+      name: "Elgato HD60 S+ Capture Card",
+      image:
+        "https://images.pexels.com/photos/442150/pexels-photo-442150.jpeg?auto=compress&cs=tinysrgb&w=400",
       rating: 4,
-      price: '$199',
-      category: 'Capture Card',
-      features: ['4K60 HDR capture', 'Ultra-low latency', 'Instant gameview'],
-      affiliateLink: '#'
-    }
+      price: "$199",
+      category: "Capture Card",
+      features: ["4K60 HDR capture", "Ultra-low latency", "Instant gameview"],
+      affiliateLink: "#",
+    },
   ];
 
   return (
@@ -70,14 +83,15 @@ const Home = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-gray-900 to-pink-900/20"></div>
         <div className="relative max-w-7xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-            Your Ultimate Hub for{' '}
+            Your Ultimate Hub for{" "}
             <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               Gaming & Streaming Gear
             </span>
           </h1>
           <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-            Discover the best gaming headsets, streaming microphones, capture cards, and accessories. 
-            Expert reviews, detailed comparisons, and honest recommendations to level up your setup.
+            Discover the best gaming headsets, streaming microphones, capture
+            cards, and accessories. Expert reviews, detailed comparisons, and
+            honest recommendations to level up your setup.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white px-8 py-4 rounded-lg font-medium text-lg flex items-center justify-center space-x-2 transition-all transform hover:scale-105">
@@ -95,8 +109,12 @@ const Home = () => {
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-800/30">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-white mb-4">Shop by Category</h2>
-            <p className="text-gray-300 text-lg">Find the perfect gear for your gaming and streaming needs</p>
+            <h2 className="text-3xl font-bold text-white mb-4">
+              Shop by Category
+            </h2>
+            <p className="text-gray-300 text-lg">
+              Find the perfect gear for your gaming and streaming needs
+            </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {categories.map((category, index) => {
@@ -110,9 +128,15 @@ const Home = () => {
                     <div className="p-4 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-full mb-4 group-hover:from-purple-600/30 group-hover:to-pink-600/30 transition-all">
                       <Icon className="h-8 w-8 text-purple-400" />
                     </div>
-                    <h3 className="text-lg font-semibold text-white mb-2">{category.name}</h3>
-                    <p className="text-gray-400 text-sm mb-3">{category.description}</p>
-                    <span className="text-purple-400 text-sm font-medium">{category.count}</span>
+                    <h3 className="text-lg font-semibold text-white mb-2">
+                      {category.name}
+                    </h3>
+                    <p className="text-gray-400 text-sm mb-3">
+                      {category.description}
+                    </p>
+                    <span className="text-purple-400 text-sm font-medium">
+                      {category.count}
+                    </span>
                   </div>
                 </div>
               );
@@ -130,7 +154,9 @@ const Home = () => {
                 <Star className="h-8 w-8 text-yellow-400 mr-3" />
                 Top Picks This Month
               </h2>
-              <p className="text-gray-300 text-lg">Hand-picked by our experts for exceptional quality and value</p>
+              <p className="text-gray-300 text-lg">
+                Hand-picked by our experts for exceptional quality and value
+              </p>
             </div>
             <button className="hidden md:flex items-center space-x-2 text-purple-400 hover:text-purple-300 font-medium transition-colors">
               <span>View All Reviews</span>

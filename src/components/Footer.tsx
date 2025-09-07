@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Gamepad2, Mail, Twitter, Youtube, Instagram } from 'lucide-react';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Gamepad2, Mail, Twitter, Youtube, Instagram } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -17,24 +17,39 @@ const Footer = () => {
                 <h2 className="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                   LevelUpGear
                 </h2>
-                <p className="text-sm text-gray-400">Your Ultimate Hub for Gaming & Streaming Gear</p>
+                <p className="text-sm text-gray-400">
+                  Your Ultimate Hub for Gaming & Streaming Gear
+                </p>
               </div>
             </Link>
             <p className="text-gray-400 text-sm mb-4 max-w-md">
-              Helping gamers and streamers find the perfect tools to level up their setup. 
-              From microphones to capture cards, we review the gear that matters.
+              Helping gamers and streamers find the perfect tools to level up
+              their setup. From microphones to capture cards, we review the gear
+              that matters.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-purple-400 transition-colors">
+              <a
+                href="#"
+                className="text-gray-400 hover:text-purple-400 transition-colors"
+              >
                 <Twitter className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-purple-400 transition-colors">
+              <a
+                href="#"
+                className="text-gray-400 hover:text-purple-400 transition-colors"
+              >
                 <Youtube className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-purple-400 transition-colors">
+              <a
+                href="#"
+                className="text-gray-400 hover:text-purple-400 transition-colors"
+              >
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-purple-400 transition-colors">
+              <a
+                href="#"
+                className="text-gray-400 hover:text-purple-400 transition-colors"
+              >
                 <Mail className="h-5 w-5" />
               </a>
             </div>
@@ -44,8 +59,30 @@ const Footer = () => {
           <div>
             <h3 className="text-white font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><Link to="/reviews" className="text-gray-400 hover:text-purple-400 transition-colors">Latest Reviews</Link></li>
-              <li><Link to="/about" className="text-gray-400 hover:text-purple-400 transition-colors">About Us</Link></li>
+              <li>
+                <Link
+                  to="/reviews"
+                  className="text-gray-400 hover:text-purple-400 transition-colors"
+                >
+                  Reviews
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/about"
+                  className="text-gray-400 hover:text-purple-400 transition-colors"
+                >
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/contact"
+                  className="text-gray-400 hover:text-purple-400 transition-colors"
+                >
+                  Contact
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -53,22 +90,66 @@ const Footer = () => {
           <div>
             <h3 className="text-white font-semibold mb-4">Categories</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-400 hover:text-purple-400 transition-colors">Headsets</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-purple-400 transition-colors">Microphones</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-purple-400 transition-colors">Capture Cards</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-purple-400 transition-colors">Streaming Software</a></li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-purple-400 transition-colors"
+                >
+                  Headsets
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-purple-400 transition-colors"
+                >
+                  Microphones
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-purple-400 transition-colors"
+                >
+                  Capture Cards
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-purple-400 transition-colors"
+                >
+                  Streaming Software
+                </a>
+              </li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">
-            © 2025 LevelUpGear. All rights reserved. As an affiliate, we earn from qualifying purchases.
+            © 2025 LevelUpGear. All rights reserved. As an affiliate, we earn
+            from qualifying purchases.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="text-gray-400 hover:text-purple-400 text-sm transition-colors">Privacy Policy</a>
-            <a href="#" className="text-gray-400 hover:text-purple-400 text-sm transition-colors">Terms of Service</a>
-            <a href="#" className="text-gray-400 hover:text-purple-400 text-sm transition-colors">Disclaimer</a>
+            <a
+              href="#"
+              className="text-gray-400 hover:text-purple-400 text-sm transition-colors"
+            >
+              Privacy Policy
+            </a>
+            <a
+              href="#"
+              className="text-gray-400 hover:text-purple-400 text-sm transition-colors"
+            >
+              Terms of Service
+            </a>
+            <a
+              href="#"
+              className="text-gray-400 hover:text-purple-400 text-sm transition-colors"
+            >
+              Disclaimer
+            </a>
           </div>
         </div>
       </div>
