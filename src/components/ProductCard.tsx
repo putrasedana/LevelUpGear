@@ -1,5 +1,6 @@
 import React from "react";
 import { Star, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface ProductCardProps {
   name: string;
@@ -72,15 +73,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
           <p className="text-sm text-gray-400">Starting at</p>
           <p className="text-xl font-bold text-white">{price}</p>
         </div>
-        <a
-          href={affiliateLink}
-          target="_blank"
-          rel="noopener noreferrer"
+        <Link
+          to="/product/1"
           className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white px-4 py-2 rounded-lg font-medium flex items-center space-x-2 transition-all transform hover:scale-105"
         >
           <span>Check Detail</span>
           <ArrowRight className="h-4 w-4" />
-        </a>
+        </Link>
       </div>
     </div>
   );
