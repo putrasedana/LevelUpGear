@@ -99,13 +99,19 @@ const Home = () => {
             honest recommendations to level up your setup.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white px-8 py-4 rounded-lg font-medium text-lg flex items-center justify-center space-x-2 transition-all transform hover:scale-105">
+            <Link
+              to="/reviews"
+              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white px-8 py-4 rounded-lg font-medium text-lg flex items-center justify-center space-x-2 transition-all transform hover:scale-105"
+            >
               <span>Find Your Perfect Setup</span>
               <ArrowRight className="h-5 w-5" />
-            </button>
-            <button className="border border-purple-500 text-purple-400 hover:bg-purple-500/10 px-8 py-4 rounded-lg font-medium text-lg transition-all">
+            </Link>
+            <a
+              href="#top-pick"
+              className="border border-purple-500 text-purple-400 hover:bg-purple-500/10 px-8 py-4 rounded-lg font-medium text-lg transition-all"
+            >
               Browse Top Picks
-            </button>
+            </a>
           </div>
         </div>
       </section>
@@ -155,7 +161,7 @@ const Home = () => {
       <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-12">
-            <div>
+            <div id="top-pick">
               <h2 className="text-3xl font-bold text-white mb-4 flex items-center">
                 <Star className="h-8 w-8 text-yellow-400 mr-3" />
                 Top Picks This Month

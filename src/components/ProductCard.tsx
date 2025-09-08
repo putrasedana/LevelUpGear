@@ -1,5 +1,5 @@
 import React from "react";
-import { Star, ExternalLink } from "lucide-react";
+import { Star, ArrowRight } from "lucide-react";
 
 interface ProductCardProps {
   name: string;
@@ -78,8 +78,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
           rel="noopener noreferrer"
           className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white px-4 py-2 rounded-lg font-medium flex items-center space-x-2 transition-all transform hover:scale-105"
         >
-          <span>Check Price</span>
-          <ExternalLink className="h-4 w-4" />
+          <span>Check Detail</span>
+          <ArrowRight className="h-4 w-4" />
         </a>
       </div>
     </div>

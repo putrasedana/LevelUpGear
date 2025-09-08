@@ -1,103 +1,121 @@
-import React, { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { Search, Filter, Star } from 'lucide-react';
-import ProductCard from '../components/ProductCard';
+import React, { useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { Search, Filter, Star } from "lucide-react";
+import ProductCard from "../components/ProductCard";
 
 const Reviews = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(
-    searchParams.get('category') || 'all'
+    searchParams.get("category") || "all"
   );
 
   // Update URL when category changes
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
-    if (category === 'all') {
-      searchParams.delete('category');
+    if (category === "all") {
+      searchParams.delete("category");
     } else {
-      searchParams.set('category', category);
+      searchParams.set("category", category);
     }
     setSearchParams(searchParams);
   };
 
   const categories = [
-    { value: 'all', label: 'All Categories' },
-    { value: 'headsets', label: 'Gaming Headsets' },
-    { value: 'microphones', label: 'Microphones' },
-    { value: 'capture-cards', label: 'Capture Cards' },
-    { value: 'software', label: 'Streaming Software' },
+    { value: "all", label: "All Categories" },
+    { value: "headsets", label: "Gaming Headsets" },
+    { value: "microphones", label: "Microphones" },
+    { value: "capture-cards", label: "Capture Cards" },
+    { value: "software", label: "Streaming Software" },
   ];
 
   const products = [
     {
-      name: 'SteelSeries Arctis 7P Wireless Gaming Headset',
-      image: 'https://images.pexels.com/photos/3945667/pexels-photo-3945667.jpeg?auto=compress&cs=tinysrgb&w=400',
+      name: "SteelSeries Arctis 7P Wireless Gaming Headset",
+      image:
+        "https://images.pexels.com/photos/3945667/pexels-photo-3945667.jpeg?auto=compress&cs=tinysrgb&w=400",
       rating: 5,
-      price: '$149',
-      category: 'Gaming Headset',
-      features: ['Wireless 2.4GHz', '24-hour battery', 'DTS Headphone:X 2.0'],
-      affiliateLink: '#',
-      badge: 'Editor\'s Choice'
+      price: "$149",
+      category: "Gaming Headset",
+      features: ["Wireless 2.4GHz", "24-hour battery", "DTS Headphone:X 2.0"],
+      affiliateLink: "#",
+      badge: "Editor's Choice",
     },
     {
-      name: 'HyperX Cloud Alpha S Gaming Headset',
-      image: 'https://images.pexels.com/photos/3945667/pexels-photo-3945667.jpeg?auto=compress&cs=tinysrgb&w=400',
+      name: "HyperX Cloud Alpha S Gaming Headset",
+      image:
+        "https://images.pexels.com/photos/3945667/pexels-photo-3945667.jpeg?auto=compress&cs=tinysrgb&w=400",
       rating: 4,
-      price: '$129',
-      category: 'Gaming Headset',
-      features: ['Dual Chamber Drivers', '7.1 Surround Sound', 'Memory foam'],
-      affiliateLink: '#'
+      price: "$129",
+      category: "Gaming Headset",
+      features: ["Dual Chamber Drivers", "7.1 Surround Sound", "Memory foam"],
+      affiliateLink: "#",
     },
     {
-      name: 'Audio-Technica AT2020USB+ Cardioid Condenser',
-      image: 'https://images.pexels.com/photos/4348401/pexels-photo-4348401.jpeg?auto=compress&cs=tinysrgb&w=400',
+      name: "Audio-Technica AT2020USB+ Cardioid Condenser",
+      image:
+        "https://images.pexels.com/photos/4348401/pexels-photo-4348401.jpeg?auto=compress&cs=tinysrgb&w=400",
       rating: 5,
-      price: '$169',
-      category: 'USB Microphone',
-      features: ['Studio-grade sound', 'USB plug-and-play', 'Zero-latency monitoring'],
-      affiliateLink: '#',
-      badge: 'Best Value'
+      price: "$169",
+      category: "USB Microphone",
+      features: [
+        "Studio-grade sound",
+        "USB plug-and-play",
+        "Zero-latency monitoring",
+      ],
+      affiliateLink: "#",
+      badge: "Best Value",
     },
     {
-      name: 'Blue Yeti USB Microphone',
-      image: 'https://images.pexels.com/photos/4348401/pexels-photo-4348401.jpeg?auto=compress&cs=tinysrgb&w=400',
+      name: "Blue Yeti USB Microphone",
+      image:
+        "https://images.pexels.com/photos/4348401/pexels-photo-4348401.jpeg?auto=compress&cs=tinysrgb&w=400",
       rating: 4,
-      price: '$99',
-      category: 'USB Microphone',
-      features: ['Multiple pickup patterns', 'Real-time headphone monitoring', 'Plug \'n play'],
-      affiliateLink: '#'
+      price: "$99",
+      category: "USB Microphone",
+      features: [
+        "Multiple pickup patterns",
+        "Real-time headphone monitoring",
+        "Plug 'n play",
+      ],
+      affiliateLink: "#",
     },
     {
-      name: 'Elgato HD60 S+ Capture Card',
-      image: 'https://images.pexels.com/photos/442150/pexels-photo-442150.jpeg?auto=compress&cs=tinysrgb&w=400',
+      name: "Elgato HD60 S+ Capture Card",
+      image:
+        "https://images.pexels.com/photos/442150/pexels-photo-442150.jpeg?auto=compress&cs=tinysrgb&w=400",
       rating: 4,
-      price: '$199',
-      category: 'Capture Card',
-      features: ['4K60 HDR capture', 'Ultra-low latency', 'Instant gameview'],
-      affiliateLink: '#'
+      price: "$199",
+      category: "Capture Card",
+      features: ["4K60 HDR capture", "Ultra-low latency", "Instant gameview"],
+      affiliateLink: "#",
     },
     {
-      name: 'AVerMedia Live Gamer Mini',
-      image: 'https://images.pexels.com/photos/442150/pexels-photo-442150.jpeg?auto=compress&cs=tinysrgb&w=400',
+      name: "AVerMedia Live Gamer Mini",
+      image:
+        "https://images.pexels.com/photos/442150/pexels-photo-442150.jpeg?auto=compress&cs=tinysrgb&w=400",
       rating: 4,
-      price: '$89',
-      category: 'Capture Card',
-      features: ['1080p60 recording', 'Plug & play', 'Zero-lag pass-through'],
-      affiliateLink: '#'
-    }
+      price: "$89",
+      category: "Capture Card",
+      features: ["1080p60 recording", "Plug & play", "Zero-lag pass-through"],
+      affiliateLink: "#",
+    },
   ];
 
-  const filteredProducts = products.filter(product => {
-    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         product.category.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || 
-                           product.category.toLowerCase().includes(selectedCategory.replace('-', ' '));
+  const filteredProducts = products.filter((product) => {
+    const matchesSearch =
+      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.category.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory =
+      selectedCategory === "all" ||
+      product.category
+        .toLowerCase()
+        .includes(selectedCategory.replace("-", " "));
     return matchesSearch && matchesCategory;
   });
 
   return (
-    <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen pt-8 pb-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
@@ -106,8 +124,8 @@ const Reviews = () => {
             Product Reviews
           </h1>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-            In-depth reviews and honest opinions on the latest gaming and streaming gear. 
-            Find your perfect match with our detailed analysis.
+            In-depth reviews and honest opinions on the latest gaming and
+            streaming gear. Find your perfect match with our detailed analysis.
           </p>
         </div>
 
@@ -135,7 +153,11 @@ const Reviews = () => {
                 className="w-full pl-10 pr-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 appearance-none cursor-pointer"
               >
                 {categories.map((category) => (
-                  <option key={category.value} value={category.value} className="bg-gray-800">
+                  <option
+                    key={category.value}
+                    value={category.value}
+                    className="bg-gray-800"
+                  >
                     {category.label}
                   </option>
                 ))}
@@ -145,7 +167,8 @@ const Reviews = () => {
 
           {/* Results Count */}
           <div className="mt-4 text-sm text-gray-400">
-            Showing {filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'}
+            Showing {filteredProducts.length}{" "}
+            {filteredProducts.length === 1 ? "product" : "products"}
             {searchTerm && ` for "${searchTerm}"`}
           </div>
         </div>
@@ -163,27 +186,20 @@ const Reviews = () => {
             <div className="text-gray-500 mb-4">
               <Search className="h-16 w-16 mx-auto mb-4" />
             </div>
-            <h3 className="text-xl font-semibold text-white mb-2">No products found</h3>
+            <h3 className="text-xl font-semibold text-white mb-2">
+              No products found
+            </h3>
             <p className="text-gray-400 mb-4">
               Try adjusting your search terms or category filter
             </p>
             <button
               onClick={() => {
-                setSearchTerm('');
-                handleCategoryChange('all');
+                setSearchTerm("");
+                handleCategoryChange("all");
               }}
               className="text-purple-400 hover:text-purple-300 font-medium"
             >
               Clear all filters
-            </button>
-          </div>
-        )}
-
-        {/* Load More Button */}
-        {filteredProducts.length > 0 && (
-          <div className="text-center mt-12">
-            <button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white px-8 py-3 rounded-lg font-medium transition-all transform hover:scale-105">
-              Load More Reviews
             </button>
           </div>
         )}
