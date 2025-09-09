@@ -24,14 +24,14 @@ const RelatedVideos: React.FC<RelatedVideosProps> = ({ review }) => {
           <div className="relative">
             <Carousel className="w-full">
               <CarouselContent>
-                {chunkArray(review.videoIds, 6).map((videoGroup, groupIndex) => (
+                {chunkArray(review.videoIds, 4).map((videoGroup, groupIndex) => (
                   <CarouselItem key={groupIndex}>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {videoGroup.map((videoId, videoIndex) => (
                         <div key={videoIndex} className="aspect-video rounded-lg overflow-hidden">
                           <iframe
                             src={`https://www.youtube.com/embed/${videoId}`}
-                            title={`Related Video ${groupIndex * 6 + videoIndex + 1}`}
+                            title={`Related Video ${groupIndex * 4 + videoIndex + 1}`}
                             className="w-full h-full"
                             frameBorder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -43,7 +43,7 @@ const RelatedVideos: React.FC<RelatedVideosProps> = ({ review }) => {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              {chunkArray(review.videoIds, 6).length > 1 && (
+              {chunkArray(review.videoIds, 4).length > 1 && (
                 <>
                   <CarouselPrevious />
                   <CarouselNext />

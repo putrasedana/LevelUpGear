@@ -66,10 +66,14 @@ const ProductDetail = () => {
       "Limited customization without SteelSeries Engine",
       "Microphone is not detachable"
     ],
-    related_videos: [
-      "SteelSeries Arctis 7P Review - Best PS5 Headset?",
-      "Arctis 7P vs Arctis 7 - Which Should You Buy?",
-      "Complete Setup Guide - SteelSeries Arctis 7P"
+    related_videos: [],
+    videoIds: [
+      "dQw4w9WgXcQ",
+      "jNQXAC9IVRw", 
+      "9bZkp7q19f0",
+      "kJQP7kiw5Fk",
+      "tgbNymZ7vqY",
+      "vTIIMJ9tUc8"
     ],
     related_blogs: [
       {
