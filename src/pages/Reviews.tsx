@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Search, Filter, Star } from "lucide-react";
+import { Search, Filter } from "lucide-react";
 import ProductCard from "../components/ProductCard";
 
 const Reviews = () => {
@@ -120,7 +120,6 @@ const Reviews = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-white mb-4 flex items-center justify-center">
-            <Star className="h-10 w-10 text-yellow-400 mr-3" />
             Product Reviews
           </h1>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto">

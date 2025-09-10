@@ -1,23 +1,23 @@
-import React from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { 
-  ArrowLeft, 
-  Check, 
-  ThumbsUp, 
-  ThumbsDown, 
-  ExternalLink, 
-  Play,
+import React from "react";
+import { useParams, Link } from "react-router-dom";
+import {
+  ArrowLeft,
+  Check,
+  ThumbsUp,
+  ThumbsDown,
+  ExternalLink,
   FileText,
   Star,
-  ArrowRight
-} from 'lucide-react';
+  ArrowRight,
+} from "lucide-react";
+import RelatedVideos from "../components/RelatedVideos";
 
 interface Product {
   id: string;
   name: string;
   website_url: string;
   logo_url: string;
-  pricing: string;
+  pricing: { name: string; url: string; price: string }[];
   tool_overview: string;
   key_features: string[];
   pros: string[];
@@ -36,9 +36,17 @@ const ProductDetail = () => {
     id: "1",
     name: "SteelSeries Arctis 7P Wireless Gaming Headset",
     website_url: "https://steelseries.com/gaming-headsets/arctis-7p",
-    logo_url: "https://images.pexels.com/photos/3945667/pexels-photo-3945667.jpeg?auto=compress&cs=tinysrgb&w=400",
-    pricing: "$149.99",
-    tool_overview: "The SteelSeries Arctis 7P is a premium wireless gaming headset designed specifically for PlayStation 5, but also compatible with PC, Mac, and mobile devices. It features lossless 2.4GHz wireless audio, exceptional comfort for long gaming sessions, and crystal-clear communication with the ClearCast microphone. With 24+ hours of battery life and DTS Headphone:X 2.0 surround sound, it's built for serious gamers who demand both performance and comfort.",
+    logo_url:
+      "https://images.pexels.com/photos/3945667/pexels-photo-3945667.jpeg?auto=compress&cs=tinysrgb&w=400",
+    pricing: [
+      { name: "Amazon", url: "#", price: "$149.99" },
+      { name: "Shopee", url: "#", price: "$149.99" },
+      { name: "Shopify", url: "#", price: "$149.99" },
+      { name: "Shopify", url: "#", price: "$149.99" },
+      { name: "Shopify", url: "#", price: "$149.99" },
+    ],
+    tool_overview:
+      "The SteelSeries Arctis 7P is a premium wireless gaming headset designed specifically for PlayStation 5, but also compatible with PC, Mac, and mobile devices. It features lossless 2.4GHz wireless audio, exceptional comfort for long gaming sessions, and crystal-clear communication with the ClearCast microphone. With 24+ hours of battery life and DTS Headphone:X 2.0 surround sound, it's built for serious gamers who demand both performance and comfort.",
     key_features: [
       "Lossless 2.4GHz wireless connection",
       "24+ hour battery life",
@@ -47,7 +55,7 @@ const ProductDetail = () => {
       "Steel-reinforced headband",
       "Memory foam ear cushions",
       "Cross-platform compatibility",
-      "SteelSeries Engine software support"
+      "SteelSeries Engine software support",
     ],
     pros: [
       "Exceptional wireless audio quality with no latency",
@@ -57,61 +65,65 @@ const ProductDetail = () => {
       "Durable build quality with steel reinforcement",
       "Easy setup across multiple platforms",
       "Excellent surround sound positioning",
-      "Lightweight design despite premium build"
+      "Lightweight design despite premium build",
     ],
     cons: [
       "Premium price point may not suit all budgets",
       "No active noise cancellation for ambient sounds",
       "Charging cable is relatively short",
       "Limited customization without SteelSeries Engine",
-      "Microphone is not detachable"
+      "Microphone is not detachable",
     ],
-    related_videos: [],
-    videoIds: [
+    related_videos: [
       "dQw4w9WgXcQ",
-      "jNQXAC9IVRw", 
+      "jNQXAC9IVRw",
       "9bZkp7q19f0",
       "kJQP7kiw5Fk",
       "tgbNymZ7vqY",
-      "vTIIMJ9tUc8"
+      "vTIIMJ9tUc8",
     ],
+
     related_blogs: [
       {
         url: "#",
-        title: "Best Gaming Headsets for PS5 in 2025"
+        title: "Best Gaming Headsets for PS5 in 2025",
       },
       {
         url: "#",
-        title: "Wireless vs Wired Gaming Headsets: Which is Better?"
+        title: "Wireless vs Wired Gaming Headsets: Which is Better?",
       },
       {
         url: "#",
-        title: "How to Choose the Perfect Gaming Headset"
-      }
+        title: "How to Choose the Perfect Gaming Headset",
+      },
     ],
-    verdict: "The SteelSeries Arctis 7P is an outstanding wireless gaming headset that delivers on all fronts - audio quality, comfort, battery life, and build quality. While it comes at a premium price, the investment is justified by its exceptional performance and versatility across multiple platforms. It's particularly excellent for PS5 gamers but works seamlessly with PC and other devices. The combination of lossless wireless audio, incredible battery life, and supreme comfort makes it our top recommendation for serious gamers who want the best wireless gaming experience.",
-    category: "Gaming Headset"
+    verdict:
+      "The SteelSeries Arctis 7P is an outstanding wireless gaming headset that delivers on all fronts - audio quality, comfort, battery life, and build quality. While it comes at a premium price, the investment is justified by its exceptional performance and versatility across multiple platforms. It's particularly excellent for PS5 gamers but works seamlessly with PC and other devices. The combination of lossless wireless audio, incredible battery life, and supreme comfort makes it our top recommendation for serious gamers who want the best wireless gaming experience.",
+    category: "Gaming Headset",
   };
 
   const suggestedProducts = [
     {
       name: "HyperX Cloud Alpha S",
-      image: "https://images.pexels.com/photos/3945667/pexels-photo-3945667.jpeg?auto=compress&cs=tinysrgb&w=400",
+      image:
+        "https://images.pexels.com/photos/3945667/pexels-photo-3945667.jpeg?auto=compress&cs=tinysrgb&w=400",
       price: "$129",
-      rating: 4
+      rating: 4,
     },
     {
       name: "Razer BlackShark V2 Pro",
-      image: "https://images.pexels.com/photos/3945667/pexels-photo-3945667.jpeg?auto=compress&cs=tinysrgb&w=400",
+      image:
+        "https://images.pexels.com/photos/3945667/pexels-photo-3945667.jpeg?auto=compress&cs=tinysrgb&w=400",
       price: "$179",
-      rating: 5
+      rating: 5,
     },
     {
       name: "Corsair HS80 RGB Wireless",
-      image: "https://images.pexels.com/photos/3945667/pexels-photo-3945667.jpeg?auto=compress&cs=tinysrgb&w=400",
+      image:
+        "https://images.pexels.com/photos/3945667/pexels-photo-3945667.jpeg?auto=compress&cs=tinysrgb&w=400",
       price: "$149",
-      rating: 4
-    }
+      rating: 4,
+    },
   ];
 
   const renderStars = (rating: number) => {
@@ -138,36 +150,46 @@ const ProductDetail = () => {
             Back to Reviews
           </Link>
 
-          <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8">
-            <div className="flex flex-col lg:flex-row items-start lg:items-center gap-6">
+          <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8 shadow-lg">
+            <div className="flex flex-col lg:flex-row items-start lg:items-center gap-8">
+              {/* Product Logo */}
               <div className="flex-shrink-0">
                 <img
                   src={product.logo_url}
                   alt={product.name}
-                  className="w-24 h-24 rounded-xl object-cover"
+                  className="w-28 h-28 md:w-44 md:h-44 lg:w-64 lg:h-64 rounded-2xl object-cover border border-gray-700 shadow-md"
                 />
               </div>
-              
+
+              {/* Product Info */}
               <div className="flex-1">
-                <div className="mb-2">
+                <div className="mb-3">
                   <span className="inline-block bg-purple-600/20 text-purple-400 px-3 py-1 rounded-full text-sm font-medium">
                     {product.category}
                   </span>
                 </div>
-                <h1 className="text-3xl font-bold text-white mb-2">{product.name}</h1>
-                <p className="text-2xl font-bold text-green-400 mb-4">{product.pricing}</p>
-              </div>
+                <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-6">
+                  {product.name}
+                </h1>
 
-              <div className="flex-shrink-0">
-                <a
-                  href={product.website_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white px-6 py-3 rounded-lg font-medium flex items-center space-x-2 transition-all transform hover:scale-105"
-                >
-                  <ExternalLink className="h-5 w-5" />
-                  <span>Visit Website</span>
-                </a>
+                {/* Pricing Buttons */}
+                <div className="flex flex-wrap gap-4">
+                  {product.pricing.map((store) => (
+                    <a
+                      key={store.name}
+                      href={store.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white px-5 py-3 rounded-xl font-medium transition-all transform hover:scale-105 shadow-md"
+                    >
+                      <span>
+                        {store.price}{" "}
+                        <span className="font-semibold">From {store.name}</span>
+                      </span>
+                      <ExternalLink className="h-5 w-5" />
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -177,7 +199,9 @@ const ProductDetail = () => {
         <div className="mb-8">
           <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8">
             <h2 className="text-2xl font-bold text-white mb-4">Overview</h2>
-            <p className="text-gray-300 leading-relaxed text-lg">{product.tool_overview}</p>
+            <p className="text-gray-300 leading-relaxed text-lg">
+              {product.tool_overview}
+            </p>
           </div>
         </div>
 
@@ -249,7 +273,9 @@ const ProductDetail = () => {
         <div className="mb-8">
           <div className="bg-gradient-to-r from-purple-900/50 to-pink-900/50 backdrop-blur-sm border border-purple-500/30 rounded-2xl p-8">
             <h2 className="text-2xl font-bold text-white mb-4">Our Verdict</h2>
-            <p className="text-gray-300 leading-relaxed text-lg">{product.verdict}</p>
+            <p className="text-gray-300 leading-relaxed text-lg">
+              {product.verdict}
+            </p>
           </div>
         </div>
 
@@ -257,7 +283,7 @@ const ProductDetail = () => {
         <div className="mb-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Related Videos */}
-            <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8">
+            {/* <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8">
               <div className="flex items-center mb-6">
                 <div className="p-2 bg-red-600/20 rounded-full mr-3">
                   <Play className="h-6 w-6 text-red-400" />
@@ -280,7 +306,8 @@ const ProductDetail = () => {
                   </a>
                 ))}
               </div>
-            </div>
+            </div> */}
+            <RelatedVideos review={product} />
 
             {/* Related Blogs */}
             <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8">
@@ -288,13 +315,17 @@ const ProductDetail = () => {
                 <div className="p-2 bg-blue-600/20 rounded-full mr-3">
                   <FileText className="h-6 w-6 text-blue-400" />
                 </div>
-                <h3 className="text-xl font-bold text-white">Related Articles</h3>
+                <h3 className="text-xl font-bold text-white">
+                  Related Articles
+                </h3>
               </div>
               <div className="space-y-3">
                 {product.related_blogs.map((blog, index) => (
                   <a
                     key={index}
                     href={blog.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="block p-3 bg-gray-700/30 rounded-lg hover:bg-gray-700/50 transition-colors group"
                   >
                     <div className="flex items-center space-x-3">
@@ -313,10 +344,15 @@ const ProductDetail = () => {
         {/* Suggested Products Section */}
         <div className="mb-8">
           <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8">
-            <h2 className="text-2xl font-bold text-white mb-6">You Might Also Like</h2>
+            <h2 className="text-2xl font-bold text-white mb-6">
+              You Might Also Like
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {suggestedProducts.map((suggestedProduct, index) => (
-                <div key={index} className="bg-gray-700/30 rounded-xl p-6 group hover:bg-gray-700/50 transition-all">
+                <div
+                  key={index}
+                  className="bg-gray-700/30 rounded-xl p-6 group hover:bg-gray-700/50 transition-all"
+                >
                   <div className="aspect-square bg-gray-600/50 rounded-lg mb-4 overflow-hidden">
                     <img
                       src={suggestedProduct.image}
@@ -331,7 +367,7 @@ const ProductDetail = () => {
                     {renderStars(suggestedProduct.rating)}
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-xl font-bold text-green-400">
+                    <span className="text-xl font-bold text-white">
                       {suggestedProduct.price}
                     </span>
                     <button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white px-4 py-2 rounded-lg font-medium flex items-center space-x-2 transition-all transform hover:scale-105">
