@@ -138,24 +138,24 @@ const Footer = () => {
             from qualifying purchases.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a
-              href="/privacy-policy"
+            <Link
+              to="/privacy-policy"
               className="text-gray-400 hover:text-purple-400 text-sm transition-colors"
             >
               Privacy Policy
-            </a>
-            <a
-              href="/terms-of-service"
+            </Link>
+            <Link
+              to="/terms-of-service"
               className="text-gray-400 hover:text-purple-400 text-sm transition-colors"
             >
               Terms of Service
-            </a>
-            <a
-              href="/disclaimer"
+            </Link>
+            <Link
+              to="/disclaimer"
               className="text-gray-400 hover:text-purple-400 text-sm transition-colors"
             >
               Disclaimer
-            </a>
+            </Link>
           </div>
         </div>
       </div>
