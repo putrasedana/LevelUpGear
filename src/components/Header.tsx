@@ -87,8 +87,7 @@ const Header = () => {
                 </Link>
               ))}
               <div className="pt-2">
-                <button className="flex items-center space-x-2 px-3 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white rounded-lg font-medium w-full justify-center">
-                  onClick={() => setIsAuthModalOpen(true)}
+                <button className="flex items-center space-x-2 px-3 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white rounded-lg font-medium w-full justify-center" onClick={() => setIsAuthModalOpen(true)}>
                   <User className="h-4 w-4" />
                   <span>Sign In</span>
                 </button>
