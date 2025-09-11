@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, User, Gamepad2 } from 'lucide-react';
-import AuthModal from './AuthModal';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const location = useLocation();
 
   const navigation = [
@@ -53,10 +51,10 @@ const Header = () => {
 
           {/* Search Button */}
           <div className="hidden md:flex items-center space-x-4">
-            <button className="flex items-center space-x-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white px-4 py-2 rounded-lg font-medium transition-all transform hover:scale-105" onClick={() => setIsAuthModalOpen(true)}>
+            <Link to="/signin" className="flex items-center space-x-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white px-4 py-2 rounded-lg font-medium transition-all transform hover:scale-105">
               <User className="h-4 w-4" />
               <span>Sign In</span>
-            </button>
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -87,21 +85,15 @@ const Header = () => {
                 </Link>
               ))}
               <div className="pt-2">
-                <button className="flex items-center space-x-2 px-3 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white rounded-lg font-medium w-full justify-center" onClick={() => setIsAuthModalOpen(true)}>
+                <Link to="/signin" className="flex items-center space-x-2 px-3 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white rounded-lg font-medium w-full justify-center">
                   <User className="h-4 w-4" />
                   <span>Sign In</span>
-                </button>
+                </Link>
               </div>
             </div>
           </div>
         )}
       </div>
-      
-      {/* Auth Modal */}
-      <AuthModal 
-        isOpen={isAuthModalOpen} 
-        onClose={() => setIsAuthModalOpen(false)} 
-      />
     </header>
   );
 };
