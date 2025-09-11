@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { User, Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
+import { useAuth } from "../contexts/AuthContext";
 
 const SignIn = () => {
+  const navigate = useNavigate();
+  const { signIn } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -46,16 +49,24 @@ const SignIn = () => {
 
     setIsLoading(true);
 
-    // Simulate API call
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-
-      // In a real app, you'd make an API call here
-      console.log("Sign in attempt:", formData);
+      const { error } = await signIn(formData.email, formData.password);
+      
+      if (error) {
+        if (error.message.includes('Invalid login credentials')) {
+          setErrors({ general: "Invalid email or password. Please try again." });
+        } else {
+          setErrors({ general: error.message });
+        }
+        return;
+      }
 
       // Reset form on success
       setFormData({ email: "", password: "" });
       setErrors({});
+      
+      // Redirect to home page
+      navigate('/');
     } catch (error) {
       setErrors({ general: "Something went wrong. Please try again." });
     } finally {

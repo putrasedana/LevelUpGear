@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { User, Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
+import { useAuth } from "../contexts/AuthContext";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const { signUp } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -58,16 +61,25 @@ const SignUp = () => {
 
     setIsLoading(true);
 
-    // Simulate API call
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-
-      // In a real app, you'd make an API call here
-      console.log("Sign up attempt:", formData);
+      const { error } = await signUp(formData.email, formData.password, formData.name);
+      
+      if (error) {
+        if (error.message.includes('User already registered')) {
+          setErrors({ email: "An account with this email already exists." });
+        } else {
+          setErrors({ general: error.message });
+        }
+        return;
+      }
 
       // Reset form on success
       setFormData({ name: "", email: "", password: "", confirmPassword: "" });
       setErrors({});
+      
+      // Show success message and redirect to sign in
+      alert("Account created successfully! Please check your email to verify your account.");
+      navigate('/signin');
     } catch (error) {
       setErrors({ general: "Something went wrong. Please try again." });
     } finally {
