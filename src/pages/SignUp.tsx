@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { User, Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
+import { User, Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
 
 const SignUp = () => {
@@ -62,10 +62,14 @@ const SignUp = () => {
     setIsLoading(true);
 
     try {
-      const { error } = await signUp(formData.email, formData.password, formData.name);
-      
+      const { error } = await signUp(
+        formData.email,
+        formData.password,
+        formData.name
+      );
+
       if (error) {
-        if (error.message.includes('User already registered')) {
+        if (error.message.includes("User already registered")) {
           setErrors({ email: "An account with this email already exists." });
         } else {
           setErrors({ general: error.message });
@@ -76,10 +80,12 @@ const SignUp = () => {
       // Reset form on success
       setFormData({ name: "", email: "", password: "", confirmPassword: "" });
       setErrors({});
-      
+
       // Show success message and redirect to sign in
-      alert("Account created successfully! Please check your email to verify your account.");
-      navigate('/signin');
+      alert(
+        "Account created successfully! Please check your email to verify your account."
+      );
+      navigate("/signin");
     } catch (error) {
       setErrors({ general: "Something went wrong. Please try again." });
     } finally {
@@ -274,7 +280,6 @@ const SignUp = () => {
               ) : (
                 <>
                   <span>Create Account</span>
-                  <ArrowRight className="h-5 w-5" />
                 </>
               )}
             </button>

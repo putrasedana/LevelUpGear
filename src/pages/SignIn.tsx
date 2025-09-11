@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { User, Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
+import { User, Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
 
 const SignIn = () => {
@@ -51,10 +51,12 @@ const SignIn = () => {
 
     try {
       const { error } = await signIn(formData.email, formData.password);
-      
+
       if (error) {
-        if (error.message.includes('Invalid login credentials')) {
-          setErrors({ general: "Invalid email or password. Please try again." });
+        if (error.message.includes("Invalid login credentials")) {
+          setErrors({
+            general: "Invalid email or password. Please try again.",
+          });
         } else {
           setErrors({ general: error.message });
         }
@@ -64,9 +66,9 @@ const SignIn = () => {
       // Reset form on success
       setFormData({ email: "", password: "" });
       setErrors({});
-      
+
       // Redirect to home page
-      navigate('/');
+      navigate("/");
     } catch (error) {
       setErrors({ general: "Something went wrong. Please try again." });
     } finally {
@@ -192,7 +194,6 @@ const SignIn = () => {
               ) : (
                 <>
                   <span>Sign In</span>
-                  <ArrowRight className="h-5 w-5" />
                 </>
               )}
             </button>

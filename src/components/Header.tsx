@@ -1,18 +1,36 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, User, Gamepad2, LogOut } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
+import React, { useState, useRef, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X, User, Gamepad2 } from "lucide-react";
+import { useAuth } from "../contexts/AuthContext";
 
 const Header = () => {
   const { user, signOut, loading } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    if (!isDropdownOpen) return;
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isDropdownOpen]);
   const location = useLocation();
 
   const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'Reviews', href: '/reviews' },
-    { name: 'About', href: '/about' },
-    { name: 'Contact', href: '/contact' },
+    { name: "Home", href: "/" },
+    { name: "Reviews", href: "/reviews" },
+    { name: "About", href: "/about" },
+    { name: "Contact", href: "/contact" },
   ];
 
   const isActive = (href: string) => location.pathname === href;
@@ -35,7 +53,9 @@ const Header = () => {
               <h1 className="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                 LevelUpGear
               </h1>
-              <p className="text-xs text-gray-400 hidden sm:block">Gaming & Streaming Hub</p>
+              <p className="text-xs text-gray-400 hidden sm:block">
+                Gaming & Streaming Hub
+              </p>
             </div>
           </Link>
 
@@ -47,8 +67,8 @@ const Header = () => {
                 to={item.href}
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-all ${
                   isActive(item.href)
-                    ? 'text-purple-400 bg-purple-900/30'
-                    : 'text-gray-300 hover:text-purple-400 hover:bg-gray-800'
+                    ? "text-purple-400 bg-purple-900/30"
+                    : "text-gray-300 hover:text-purple-400 hover:bg-gray-800"
                 }`}
               >
                 {item.name}
@@ -56,23 +76,54 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Search Button */}
-          <div className="hidden md:flex items-center space-x-4">
+          {/* User/Sign In Button */}
+          <div className="hidden md:flex items-center space-x-4 relative">
             {loading ? (
               <div className="w-8 h-8 border-2 border-purple-400 border-t-transparent rounded-full animate-spin"></div>
             ) : user ? (
-              <div className="flex items-center space-x-4">
-                <span className="text-gray-300">Welcome, {user.user_metadata?.full_name || user.email}</span>
+              <div className="relative" ref={dropdownRef}>
                 <button
-                  onClick={handleSignOut}
-                  className="flex items-center space-x-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white px-4 py-2 rounded-lg font-medium transition-all transform hover:scale-105"
+                  onClick={() => setIsDropdownOpen((open) => !open)}
+                  className="flex items-center space-x-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white px-4 py-2 rounded-lg font-medium transition-all transform hover:scale-105 focus:outline-none"
                 >
-                  <LogOut className="h-4 w-4" />
-                  <span>Sign Out</span>
+                  <User className="h-4 w-4" />
+                  <span>
+                    {user.email ? user.email.replace(/@gmail\.com$/, "") : ""}
+                  </span>
                 </button>
+                {isDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-44 bg-gray-800 border border-gray-700 rounded-lg shadow-lg z-50">
+                    <Link
+                      to="/admin"
+                      className="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 rounded-t-lg"
+                      onClick={() => setIsDropdownOpen(false)}
+                    >
+                      Admin
+                    </Link>
+                    <Link
+                      to="/profile"
+                      className="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700"
+                      onClick={() => setIsDropdownOpen(false)}
+                    >
+                      Profile
+                    </Link>
+                    <button
+                      onClick={() => {
+                        handleSignOut();
+                        setIsDropdownOpen(false);
+                      }}
+                      className="w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-gray-700 rounded-b-lg"
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                )}
               </div>
             ) : (
-              <Link to="/signin" className="flex items-center space-x-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white px-4 py-2 rounded-lg font-medium transition-all transform hover:scale-105">
+              <Link
+                to="/signin"
+                className="flex items-center space-x-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white px-4 py-2 rounded-lg font-medium transition-all transform hover:scale-105"
+              >
                 <User className="h-4 w-4" />
                 <span>Sign In</span>
               </Link>
@@ -84,7 +135,11 @@ const Header = () => {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-800"
           >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {isMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
           </button>
         </div>
 
@@ -99,8 +154,8 @@ const Header = () => {
                   onClick={() => setIsMenuOpen(false)}
                   className={`block px-3 py-2 rounded-md text-base font-medium transition-all ${
                     isActive(item.href)
-                      ? 'text-purple-400 bg-purple-900/30'
-                      : 'text-gray-300 hover:text-purple-400 hover:bg-gray-800'
+                      ? "text-purple-400 bg-purple-900/30"
+                      : "text-gray-300 hover:text-purple-400 hover:bg-gray-800"
                   }`}
                 >
                   {item.name}
@@ -112,20 +167,58 @@ const Header = () => {
                     <div className="w-6 h-6 border-2 border-purple-400 border-t-transparent rounded-full animate-spin"></div>
                   </div>
                 ) : user ? (
-                  <div className="space-y-2">
-                    <div className="px-3 py-2 text-gray-300 text-center">
-                      Welcome, {user.user_metadata?.full_name || user.email}
-                    </div>
+                  <div className="space-y-2" ref={dropdownRef}>
                     <button
-                      onClick={handleSignOut}
-                      className="flex items-center space-x-2 px-3 py-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white rounded-lg font-medium w-full justify-center"
+                      onClick={() => setIsDropdownOpen((open) => !open)}
+                      className="flex items-center space-x-2 px-3 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white rounded-lg font-medium w-full justify-center"
                     >
-                      <LogOut className="h-4 w-4" />
-                      <span>Sign Out</span>
+                      <User className="h-4 w-4" />
+                      <span>
+                        {user.email
+                          ? user.email.replace(/@gmail\.com$/, "")
+                          : ""}
+                      </span>
                     </button>
+                    {isDropdownOpen && (
+                      <div className="bg-gray-800 border border-gray-700 rounded-lg shadow-lg mt-2">
+                        <Link
+                          to="/admin"
+                          className="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 rounded-t-lg"
+                          onClick={() => {
+                            setIsDropdownOpen(false);
+                            setIsMenuOpen(false);
+                          }}
+                        >
+                          Admin
+                        </Link>
+                        <Link
+                          to="/profile"
+                          className="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700"
+                          onClick={() => {
+                            setIsDropdownOpen(false);
+                            setIsMenuOpen(false);
+                          }}
+                        >
+                          Profile
+                        </Link>
+                        <button
+                          onClick={() => {
+                            handleSignOut();
+                            setIsDropdownOpen(false);
+                            setIsMenuOpen(false);
+                          }}
+                          className="w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-gray-700 rounded-b-lg"
+                        >
+                          Sign Out
+                        </button>
+                      </div>
+                    )}
                   </div>
                 ) : (
-                  <Link to="/signin" className="flex items-center space-x-2 px-3 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white rounded-lg font-medium w-full justify-center">
+                  <Link
+                    to="/signin"
+                    className="flex items-center space-x-2 px-3 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white rounded-lg font-medium w-full justify-center"
+                  >
                     <User className="h-4 w-4" />
                     <span>Sign In</span>
                   </Link>
