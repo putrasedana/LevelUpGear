@@ -13,6 +13,8 @@ import Disclaimer from "./pages/Disclaimer";
 import ProductDetail from "./pages/ProductDetail";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import Admin from "./pages/Admin";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -56,6 +58,14 @@ function App() {
                     />
                     <Route path="/disclaimer" element={<Disclaimer />} />
                     <Route path="/product/:id" element={<ProductDetail />} />
+                    <Route 
+                      path="/admin" 
+                      element={
+                        <ProtectedRoute requireAdmin={true}>
+                          <Admin />
+                        </ProtectedRoute>
+                      } 
+                    />
                   </Routes>
                 </main>
                 <Footer />

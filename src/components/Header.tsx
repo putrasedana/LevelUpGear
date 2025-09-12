@@ -4,7 +4,7 @@ import { Menu, X, User, Gamepad2 } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
 
 const Header = () => {
-  const { user, signOut, loading } = useAuth();
+  const { user, signOut, loading, isAdmin } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -93,13 +93,15 @@ const Header = () => {
                 </button>
                 {isDropdownOpen && (
                   <div className="absolute right-0 mt-2 w-44 bg-gray-800 border border-gray-700 rounded-lg shadow-lg z-50">
-                    <Link
-                      to="/admin"
-                      className="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 rounded-t-lg"
-                      onClick={() => setIsDropdownOpen(false)}
-                    >
-                      Admin
-                    </Link>
+                    {isAdmin && (
+                      <Link
+                        to="/admin"
+                        className="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 rounded-t-lg"
+                        onClick={() => setIsDropdownOpen(false)}
+                      >
+                        Admin Dashboard
+                      </Link>
+                    )}
                     <Link
                       to="/profile"
                       className="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700"
@@ -181,16 +183,18 @@ const Header = () => {
                     </button>
                     {isDropdownOpen && (
                       <div className="bg-gray-800 border border-gray-700 rounded-lg shadow-lg mt-2">
-                        <Link
-                          to="/admin"
-                          className="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 rounded-t-lg"
-                          onClick={() => {
-                            setIsDropdownOpen(false);
-                            setIsMenuOpen(false);
-                          }}
-                        >
-                          Admin
-                        </Link>
+                        {isAdmin && (
+                          <Link
+                            to="/admin"
+                            className="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 rounded-t-lg"
+                            onClick={() => {
+                              setIsDropdownOpen(false);
+                              setIsMenuOpen(false);
+                            }}
+                          >
+                            Admin Dashboard
+                          </Link>
+                        )}
                         <Link
                           to="/profile"
                           className="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700"
