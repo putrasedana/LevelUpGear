@@ -36,8 +36,9 @@ const Header = () => {
   const isActive = (href: string) => location.pathname === href;
 
   const handleSignOut = async () => {
+    setIsDropdownOpen(false)
+    setIsMenuOpen(false)
     await signOut();
-    setIsMenuOpen(false);
   };
 
   return (
