@@ -88,20 +88,11 @@ const Header = () => {
                 >
                   <User className="h-4 w-4" />
                   <span>
-                    {user.email ? user.email.replace(/@gmail\.com$/, "") : ""}
+                    {user.email ? user.email.split('@')[0] : "User"}
                   </span>
                 </button>
                 {isDropdownOpen && (
                   <div className="absolute right-0 mt-2 w-44 bg-gray-800 border border-gray-700 rounded-lg shadow-lg z-50">
-                    {isAdmin && (
-                      <Link
-                        to="/admin"
-                        className="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 rounded-t-lg"
-                        onClick={() => setIsDropdownOpen(false)}
-                      >
-                        Admin Dashboard
-                      </Link>
-                    )}
                     {isAdmin && (
                       <Link
                         to="/admin"
@@ -127,7 +118,7 @@ const Header = () => {
                     </Link>
                     <button
                       onClick={() => {
-                        handleSignOut();
+                        handleSignOut()
                         setIsDropdownOpen(false);
                       }}
                       className="w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-gray-700 rounded-b-lg"
@@ -192,25 +183,11 @@ const Header = () => {
                     >
                       <User className="h-4 w-4" />
                       <span>
-                        {user.email
-                          ? user.email.replace(/@gmail\.com$/, "")
-                          : ""}
+                        {user.email ? user.email.split('@')[0] : "User"}
                       </span>
                     </button>
                     {isDropdownOpen && (
                       <div className="bg-gray-800 border border-gray-700 rounded-lg shadow-lg mt-2">
-                        {isAdmin && (
-                          <Link
-                            to="/admin"
-                            className="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 rounded-t-lg"
-                            onClick={() => {
-                              setIsDropdownOpen(false);
-                              setIsMenuOpen(false);
-                            }}
-                          >
-                            Admin Dashboard
-                          </Link>
-                        )}
                         {isAdmin && (
                           <Link
                             to="/admin"
@@ -245,7 +222,7 @@ const Header = () => {
                         </Link>
                         <button
                           onClick={() => {
-                            handleSignOut();
+                            handleSignOut()
                             setIsDropdownOpen(false);
                             setIsMenuOpen(false);
                           }}

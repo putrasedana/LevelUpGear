@@ -27,6 +27,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(true)
   const [isAdmin, setIsAdmin] = useState(false)
+  const [roleChecked, setRoleChecked] = useState(false)
 
   // Function to check user role from database
   const checkUserRole = async (userId: string) => {
@@ -48,6 +49,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       return false
     }
   }
+
   useEffect(() => {
     // Get initial session
     supabase.auth.getSession().then(async ({ data: { session } }) => {
@@ -55,12 +57,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUser(session?.user ?? null)
       
       if (session?.user) {
-        const adminStatus = await checkUserRole(session.user.id)
-        setIsAdmin(adminStatus)
+        try {
+          const adminStatus = await checkUserRole(session.user.id)
+          setIsAdmin(adminStatus)
+        } catch (error) {
+          console.error('Error checking admin status:', error)
+          setIsAdmin(false)
+        }
       } else {
         setIsAdmin(false)
       }
       
+      setRoleChecked(true)
       setLoading(false)
     })
 
@@ -72,12 +80,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUser(session?.user ?? null)
       
       if (session?.user) {
-        const adminStatus = await checkUserRole(session.user.id)
-        setIsAdmin(adminStatus)
+        try {
+          const adminStatus = await checkUserRole(session.user.id)
+          setIsAdmin(adminStatus)
+        } catch (error) {
+          console.error('Error checking admin status:', error)
+          setIsAdmin(false)
+        }
       } else {
         setIsAdmin(false)
       }
       
+      setRoleChecked(true)
       setLoading(false)
     })
 
