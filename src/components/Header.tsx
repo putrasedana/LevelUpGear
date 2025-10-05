@@ -102,12 +102,28 @@ const Header = () => {
                         Admin Dashboard
                       </Link>
                     )}
+                    {isAdmin && (
+                      <Link
+                        to="/admin"
+                        className="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 rounded-t-lg"
+                        onClick={() => setIsDropdownOpen(false)}
+                      >
+                        Admin Dashboard
+                      </Link>
+                    )}
                     <Link
                       to="/profile"
                       className="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700"
                       onClick={() => setIsDropdownOpen(false)}
                     >
                       Profile
+                    </Link>
+                    <Link
+                      to="/settings"
+                      className="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700"
+                      onClick={() => setIsDropdownOpen(false)}
+                    >
+                      Settings
                     </Link>
                     <button
                       onClick={() => {
@@ -195,6 +211,18 @@ const Header = () => {
                             Admin Dashboard
                           </Link>
                         )}
+                        {isAdmin && (
+                          <Link
+                            to="/admin"
+                            className="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 rounded-t-lg"
+                            onClick={() => {
+                              setIsDropdownOpen(false);
+                              setIsMenuOpen(false);
+                            }}
+                          >
+                            Admin Dashboard
+                          </Link>
+                        )}
                         <Link
                           to="/profile"
                           className="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700"
@@ -204,6 +232,16 @@ const Header = () => {
                           }}
                         >
                           Profile
+                        </Link>
+                        <Link
+                          to="/settings"
+                          className="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700"
+                          onClick={() => {
+                            setIsDropdownOpen(false);
+                            setIsMenuOpen(false);
+                          }}
+                        >
+                          Settings
                         </Link>
                         <button
                           onClick={() => {
