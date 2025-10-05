@@ -52,7 +52,7 @@ const Admin = () => {
   const recentUsers = [
     { id: 1, name: 'John Doe', email: 'john@example.com', role: 'User', joined: '2025-01-15' },
     { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'User', joined: '2025-01-14' },
-    { id: 3, name: 'Mike Johnson', email: 'mike@example.com', role: 'User', joined: '2025-01-13' },
+    { id: 3, name: 'Putra Sedana', email: 'putrasedana03@gmail.com', role: 'Admin', joined: '2025-01-13' },
   ];
 
   const renderDashboard = () => (
@@ -62,9 +62,12 @@ const Admin = () => {
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-3xl font-bold text-white mb-2">
-              Welcome back, {user?.user_metadata?.full_name || user?.email?.split('@')[0]}!
+              Welcome back, Admin!
             </h2>
             <p className="text-gray-300">Here's what's happening with LevelUpGear today.</p>
+            <p className="text-sm text-purple-400 mt-2">
+              Logged in as: {user?.email}
+            </p>
           </div>
           <div className="p-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full">
             <Shield className="h-8 w-8 text-white" />
@@ -148,7 +151,11 @@ const Admin = () => {
                   </div>
                 </div>
                 <div className="text-right">
-                  <span className="px-2 py-1 bg-blue-600/20 text-blue-400 rounded-full text-xs">
+                  <span className={`px-2 py-1 rounded-full text-xs ${
+                    user.role === 'Admin' 
+                      ? 'bg-purple-600/20 text-purple-400' 
+                      : 'bg-blue-600/20 text-blue-400'
+                  }`}>
                     {user.role}
                   </span>
                   <p className="text-gray-400 text-xs mt-1">{user.joined}</p>

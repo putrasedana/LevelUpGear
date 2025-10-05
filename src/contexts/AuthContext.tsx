@@ -28,21 +28,56 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true)
   const [isAdmin, setIsAdmin] = useState(false)
 
+  // Function to check user role from database
+  const checkUserRole = async (userId: string) => {
+    try {
+      const { data, error } = await supabase
+        .from('user_roles')
+        .select('role')
+        .eq('user_id', userId)
+        .single()
+      
+      if (error) {
+        console.error('Error fetching user role:', error)
+        return false
+      }
+      
+      return data?.role === 'admin'
+    } catch (error) {
+      console.error('Error checking user role:', error)
+      return false
+    }
+  }
   useEffect(() => {
     // Get initial session
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
       setSession(session)
       setUser(session?.user ?? null)
+      
+      if (session?.user) {
+        const adminStatus = await checkUserRole(session.user.id)
+        setIsAdmin(adminStatus)
+      } else {
+        setIsAdmin(false)
+      }
+      
       setLoading(false)
     })
 
     // Listen for auth changes
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
+    } = supabase.auth.onAuthStateChange(async (_event, session) => {
       setSession(session)
       setUser(session?.user ?? null)
-      setIsAdmin(session?.user?.user_metadata?.role === 'admin' || session?.user?.email === 'admin@levelupgear.com')
+      
+      if (session?.user) {
+        const adminStatus = await checkUserRole(session.user.id)
+        setIsAdmin(adminStatus)
+      } else {
+        setIsAdmin(false)
+      }
+      
       setLoading(false)
     })
 
