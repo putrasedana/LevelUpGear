@@ -1,24 +1,5 @@
 import React, { useState } from 'react';
-import { 
-  Users, 
-  FileText, 
-  BarChart3, 
-  Settings, 
-  Plus,
-  Edit,
-  Trash2,
-  Eye,
-  Search,
-  Filter,
-  Download,
-  Upload,
-  Shield,
-  Mail,
-  Calendar,
-  TrendingUp,
-  Star,
-  MessageSquare
-} from 'lucide-react';
+import { Users, FileText, BarChart3, Settings, Plus, CreditCard as Edit, Trash2, Eye, Search, Filter, Download, Upload, Shield, Mail, Calendar, TrendingUp, Star, MessageSquare } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
 const Admin = () => {
