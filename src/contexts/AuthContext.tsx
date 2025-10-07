@@ -28,26 +28,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true)
   const [isAdmin, setIsAdmin] = useState(false)
 
-  // Function to check user role from database
-  const checkUserRole = async (userId: string) => {
-    try {
-      const { data, error } = await supabase
-        .from('user_roles')
-        .select('role')
-        .eq('user_id', userId)
-        .single()
-      
-      if (error) {
-        // If there's an error (like table doesn't exist yet), just return false
-        // Don't log error to avoid console spam during development
-        return false
-      }
-      
-      return data?.role === 'admin'
-    } catch (error) {
-      // Silently handle errors and default to non-admin
-      return false
-    }
+  // Simplified admin check - avoid database recursion issues
+  const checkUserRole = async (userEmail: string) => {
+    // For now, just check if email is the admin email
+    // This avoids the database recursion issue
+    return userEmail === 'putrasedana03@gmail.com'
   }
 
   useEffect(() => {
@@ -57,12 +42,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUser(session?.user ?? null)
       
       if (session?.user) {
-        try {
-          const adminStatus = await checkUserRole(session.user.id)
-          setIsAdmin(adminStatus)
-        } catch (error) {
-          setIsAdmin(false)
-        }
+        const adminStatus = await checkUserRole(session.user.email || '')
+        setIsAdmin(adminStatus)
       } else {
         setIsAdmin(false)
       }
@@ -74,41 +55,29 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      setLoading(true)
       setSession(session)
       setUser(session?.user ?? null)
       
       if (session?.user) {
-        try {
-          const adminStatus = await checkUserRole(session.user.id)
-          setIsAdmin(adminStatus)
-        } catch (error) {
-          setIsAdmin(false)
-        }
+        const adminStatus = await checkUserRole(session.user.email || '')
+        setIsAdmin(adminStatus)
       } else {
         setIsAdmin(false)
       }
-      
-      setLoading(false)
     })
 
     return () => subscription.unsubscribe()
   }, [])
 
   const signIn = async (email: string, password: string) => {
-    setLoading(true)
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
     })
-    if (error) {
-      setLoading(false)
-    }
     return { error }
   }
 
   const signUp = async (email: string, password: string, name: string) => {
-    setLoading(true)
     const { error } = await supabase.auth.signUp({
       email,
       password,
@@ -118,17 +87,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         },
       },
     })
-    if (error) {
-      setLoading(false)
-    }
     return { error }
   }
 
   const signOut = async () => {
-    setLoading(true)
     setIsAdmin(false)
     await supabase.auth.signOut()
-    // Loading will be set to false by the auth state change listener
   }
 
   const value = {
