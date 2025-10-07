@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Users, FileText, BarChart3, Settings, Plus, CreditCard as Edit, Trash2, Eye, Search, Filter, Download, Upload, Shield, Mail, Calendar, TrendingUp, Star, MessageSquare, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
 const Admin = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('dashboard');
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -155,6 +157,7 @@ const Admin = () => {
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold text-white">Product Management</h2>
         <button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white px-4 py-2 rounded-lg font-medium flex items-center space-x-2 transition-all transform hover:scale-105">
+          onClick={() => navigate('/admin/add-product')}
           <Plus className="h-4 w-4" />
           <span>Add Product</span>
         </button>
