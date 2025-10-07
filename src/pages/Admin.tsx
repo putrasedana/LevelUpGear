@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Users, FileText, BarChart3, Settings, Plus, CreditCard as Edit, Trash2, Eye, Search, Filter, Download, Upload, Shield, Mail, Calendar, TrendingUp, Star, MessageSquare } from 'lucide-react';
+import { Users, FileText, BarChart3, Settings, Plus, CreditCard as Edit, Trash2, Eye, Search, Filter, Download, Upload, Shield, Mail, Calendar, TrendingUp, Star, MessageSquare, ExternalLink } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
 const Admin = () => {
@@ -295,6 +296,17 @@ const Admin = () => {
                 );
               })}
             </nav>
+
+            {/* View Site Button */}
+            <div className="mt-auto p-6 border-t border-gray-700">
+              <Link
+                to="/"
+                className="w-full flex items-center space-x-3 px-4 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white rounded-lg font-medium transition-all transform hover:scale-105"
+              >
+                <ExternalLink className="h-5 w-5" />
+                <span>View Site</span>
+              </Link>
+            </div>
           </div>
         </div>
 

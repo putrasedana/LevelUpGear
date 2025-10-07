@@ -39,6 +39,15 @@ function App() {
               </div>
             }
           />
+          {/* Admin page without Header/Footer */}
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute requireAdmin={true}>
+                <Admin />
+              </ProtectedRoute>
+            }
+          />
           {/* All other pages with Header/Footer */}
           <Route
             path="*"
@@ -58,14 +67,6 @@ function App() {
                     />
                     <Route path="/disclaimer" element={<Disclaimer />} />
                     <Route path="/product/:id" element={<ProductDetail />} />
-                    <Route 
-                      path="/admin" 
-                      element={
-                        <ProtectedRoute requireAdmin={true}>
-                          <Admin />
-                        </ProtectedRoute>
-                      } 
-                    />
                   </Routes>
                 </main>
                 <Footer />
