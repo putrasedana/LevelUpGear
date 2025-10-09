@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Save, X, Plus, Trash2, Upload, ExternalLink } from 'lucide-react';
+import { supabase } from '../lib/supabase';
+import { useAuth } from '../contexts/AuthContext';
 
 const AddProduct = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string>('');
   const [formData, setFormData] = useState({
     name: '',
     category: 'Gaming Headset',
@@ -70,20 +74,48 @@ const AddProduct = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
     setIsLoading(true);
 
     try {
-      // Here you would typically save to your database
-      console.log('Product data:', formData);
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Navigate back to products page
+      // Validate required fields
+      if (!formData.name.trim()) {
+        throw new Error('Product name is required');
+      }
+      if (!formData.tool_overview.trim()) {
+        throw new Error('Tool overview is required');
+      }
+      if (!formData.verdict.trim()) {
+        throw new Error('Verdict is required');
+      }
+
+      // Filter out empty strings from arrays
+      const cleanedData = {
+        ...formData,
+        key_features: formData.key_features.filter(f => f.trim() !== ''),
+        pros: formData.pros.filter(p => p.trim() !== ''),
+        cons: formData.cons.filter(c => c.trim() !== ''),
+        related_videos: formData.related_videos.filter(v => v.trim() !== ''),
+        related_blogs: formData.related_blogs.filter(b => b.title.trim() !== '' && b.url.trim() !== ''),
+        pricing: formData.pricing.filter(p => p.name.trim() !== '' || p.price.trim() !== '' || p.url.trim() !== ''),
+        created_by: user?.id
+      };
+
+      const { data, error } = await supabase
+        .from('products')
+        .insert([cleanedData])
+        .select();
+
+      if (error) {
+        throw error;
+      }
+
+      console.log('Product created successfully:', data);
       navigate('/admin');
       
     } catch (error) {
       console.error('Error saving product:', error);
+      setError(error instanceof Error ? error.message : 'Failed to save product');
     } finally {
       setIsLoading(false);
     }
@@ -136,6 +168,13 @@ const AddProduct = () => {
 
         {/* Form */}
         <form id="product-form" onSubmit={handleSubmit} className="space-y-8">
+          {/* Error Message */}
+          {error && (
+            <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
+              <p className="text-red-400">{error}</p>
+            </div>
+          )}
+
           {/* Basic Information */}
           <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-xl p-6">
             <h2 className="text-xl font-bold text-white mb-6">Basic Information</h2>
