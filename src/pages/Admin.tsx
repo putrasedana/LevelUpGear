@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Users, FileText, BarChart3, Settings, Plus, CreditCard as Edit, Trash2, Eye, Search, Filter, Download, Upload, Shield, Mail, Calendar, TrendingUp, Star, MessageSquare, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
@@ -7,7 +7,8 @@ import { useAuth } from '../contexts/AuthContext';
 const Admin = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState('dashboard');
+  const [searchParams] = useSearchParams();
+  const [activeTab, setActiveTab] = useState(searchParams.get('tab') || 'dashboard');
   const [searchTerm, setSearchTerm] = useState('');
 
   const tabs = [

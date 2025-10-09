@@ -3,10 +3,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Save, X, Plus, Trash2, Upload, ExternalLink } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
+import { useToast } from '../contexts/ToastContext';
 
 const AddProduct = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { showToast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string>('');
   const [formData, setFormData] = useState({
@@ -111,11 +113,16 @@ const AddProduct = () => {
       }
 
       console.log('Product created successfully:', data);
-      navigate('/admin');
+      
+      // Show success toast and redirect to Products tab
+      showToast('Product added successfully!', 'success');
+      navigate('/admin?tab=products');
       
     } catch (error) {
       console.error('Error saving product:', error);
-      setError(error instanceof Error ? error.message : 'Failed to save product');
+      const errorMessage = error instanceof Error ? error.message : 'Failed to save product';
+      setError(errorMessage);
+      showToast(`Failed to add product: ${errorMessage}`, 'error');
     } finally {
       setIsLoading(false);
     }

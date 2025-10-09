@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
+import { ToastProvider } from "./contexts/ToastContext";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
@@ -20,70 +21,72 @@ import ProtectedRoute from "./components/ProtectedRoute";
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <ScrollToTop />
-        <Routes>
-          {/* Auth pages without Header/Footer */}
-          <Route
-            path="/signin"
-            element={
-              <div className="min-h-screen bg-gray-900 text-white">
-                <SignIn />
-              </div>
-            }
-          />
-          <Route
-            path="/signup"
-            element={
-              <div className="min-h-screen bg-gray-900 text-white">
-                <SignUp />
-              </div>
-            }
-          />
-          {/* Admin page without Header/Footer */}
-          <Route
-            path="/admin"
-            element={
-              <ProtectedRoute requireAdmin={true}>
-                <Admin />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin/add-product"
-            element={
-              <ProtectedRoute requireAdmin={true}>
-                <AddProduct />
-              </ProtectedRoute>
-            }
-          />
-          {/* All other pages with Header/Footer */}
-          <Route
-            path="*"
-            element={
-              <div className="min-h-screen bg-gray-900 text-white">
-                <Header />
-                <main>
-                  <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/reviews" element={<Reviews />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/contact" element={<Contact />} />
-                    <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                    <Route
-                      path="/terms-of-service"
-                      element={<TermsOfService />}
-                    />
-                    <Route path="/disclaimer" element={<Disclaimer />} />
-                    <Route path="/product/:id" element={<ProductDetail />} />
-                  </Routes>
-                </main>
-                <Footer />
-              </div>
-            }
-          />
-        </Routes>
-      </Router>
+      <ToastProvider>
+        <Router>
+          <ScrollToTop />
+          <Routes>
+            {/* Auth pages without Header/Footer */}
+            <Route
+              path="/signin"
+              element={
+                <div className="min-h-screen bg-gray-900 text-white">
+                  <SignIn />
+                </div>
+              }
+            />
+            <Route
+              path="/signup"
+              element={
+                <div className="min-h-screen bg-gray-900 text-white">
+                  <SignUp />
+                </div>
+              }
+            />
+            {/* Admin pages without Header/Footer */}
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute requireAdmin={true}>
+                  <Admin />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/add-product"
+              element={
+                <ProtectedRoute requireAdmin={true}>
+                  <AddProduct />
+                </ProtectedRoute>
+              }
+            />
+            {/* All other pages with Header/Footer */}
+            <Route
+              path="*"
+              element={
+                <div className="min-h-screen bg-gray-900 text-white">
+                  <Header />
+                  <main>
+                    <Routes>
+                      <Route path="/" element={<Home />} />
+                      <Route path="/reviews" element={<Reviews />} />
+                      <Route path="/about" element={<About />} />
+                      <Route path="/contact" element={<Contact />} />
+                      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                      <Route
+                        path="/terms-of-service"
+                        element={<TermsOfService />}
+                      />
+                      <Route path="/disclaimer" element={<Disclaimer />} />
+                      <Route path="/product/:id" element={<ProductDetail />} />
+                    </Routes>
+                  </main>
+                  <Footer />
+                </div>
+              }
+            />
+          </Routes>
+        </Router>
+      </ToastProvider>
     </AuthProvider>
   );
 }
